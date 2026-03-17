@@ -1,0 +1,14 @@
+#include<fcntl.h>//file control system call functions
+#include<unistd.h>
+int main(){
+int fd;//file descriptor
+char buf[50]="File handling using system calls\n";
+fd=open("myfile.txt",O_CREAT | O_RDWR);
+write(fd,buf,50);
+close(fd);
+return 0;
+}
+
+
+
+
