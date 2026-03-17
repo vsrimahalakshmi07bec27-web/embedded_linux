@@ -1,7 +1,7 @@
-#include <fcntl.h>    // For open flags
-#include <unistd.h>   // For read, write, lseek, close
-#include <stdio.h>    // For printf
-#include <sys/stat.h> // For chmod and permission constants
+#include <fcntl.h>
+#include <unistd.h> 
+#include <stdio.h>   
+#include <sys/stat.h> 
 int main() {
     int fd;
     char buf[50];
