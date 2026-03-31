@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+int main() {
+    pid_t child_pid, grandchild_pid;
+    // First fork: Creates the Child
+    child_pid = fork();
+    if (child_pid < 0) {
+        printf("Fork failed");
+        exit(1);
+    }
+    if (child_pid == 0) {
+        grandchild_pid = fork();
+        if (grandchild_pid < 0) {
+            printf("Grandchild fork failed");
+            exit(1);
+        }
+        if (grandchild_pid == 0) {
+            printf("GRANDCHILD: PID = %d, Parent PID = %d\n", getpid(), getppid());
+            exit(0);
+        } else {
+            wait(NULL); 
+            printf("CHILD:      PID = %d, Parent PID = %d\n", getpid(), getppid());
+            exit(0);
+        }
+    } else {
+        wait(NULL); 
+        printf("PARENT:     PID = %d, Parent PID = %d\n", getpid(), getppid());
+    }
+
+    return 0;
+}
